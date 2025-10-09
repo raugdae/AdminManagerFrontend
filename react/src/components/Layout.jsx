@@ -1,4 +1,4 @@
-
+import "../styles/components/Layout.css"
 import {Link} from 'react-router-dom';
 
 function Layout({children}){
@@ -8,11 +8,6 @@ function Layout({children}){
             <header>Bienvenu sur l'Hydromanager</header>
 
             <div className="content-wrapper">
-                <aside>
-                    <Link to ="/auth/login"> Se connecter </Link>
-                    <Link to ="/auth/register">S'enregsitere</Link>
-                </aside>
-
                 <main>
                     {children}
                 </main>

@@ -30,6 +30,7 @@ class ApiClient {
 
   // Méthodes raccourcies
   get(endpoint) {
+    console.log(this.token);
     return this.request(endpoint, { method: 'GET' })
   }
 

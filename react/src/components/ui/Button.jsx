@@ -4,8 +4,8 @@ function Button({children, onClick, type = 'button', disabled = false, variant =
     return (
         <button
         type = {type}
-        onclick= {onClick}
-        disbaled = {disabled}
+        onClick= {onClick}
+        disabled = {disabled}
         className={`btn btn-${variant}`}
         >
             {children}

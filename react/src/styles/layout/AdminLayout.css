@@ -1,0 +1,13 @@
+.admin-container{
+    
+    left:0;
+    right:0;
+
+    width:60%;
+    height:60%;
+
+    border:5px;
+    border-color: yellow;
+
+    background-color: orange;
+}

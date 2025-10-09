@@ -1,7 +1,7 @@
 import {apiClient} from './client'
 
 export async function login (email, password){
-    return apiClient.post('/api/auth/login', {login:email,password})
+    return apiClient.post('/api/auth/login', {login:email,password:password})
 }
 
 export async function register(email,password){

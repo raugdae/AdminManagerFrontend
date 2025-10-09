@@ -1,0 +1,8 @@
+.app-container{
+    width: 60%;
+    position:relative;
+    top:40px;
+    left:40px;
+    
+    background-color: pink;
+}

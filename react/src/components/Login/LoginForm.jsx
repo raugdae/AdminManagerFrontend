@@ -18,18 +18,20 @@ function LoginForm({ onSuccess }) {
     
     try {
       // Utilise la fonction importée
-      const data = await login(email, password)
+      const response = await login(email, password)
       //                    ↑ Fonction depuis auth.js
       
       // Succès
       setMessage({ text: '✅ Connexion réussie !', type: 'success' })
+      console.log(response.data.token)
       
-      if (data.token) {
-        localStorage.setItem('token', data.token)
+      if (response.data.token) {
+        localStorage.setItem('token', response.data.token)
+        
       }
       
       if (onSuccess) {
-        onSuccess(data)
+        onSuccess(response.data)
       }
       
     } catch (error) {

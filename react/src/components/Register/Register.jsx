@@ -1,5 +1,5 @@
 import RegisterForm from './RegisterForm'
-import '../../styles/Register.css'
+
 
 function Register() {
     const handleRegisterSuccess = (data) => {
@@ -9,7 +9,6 @@ function Register() {
     return (
         <div className="register-page">
             <div className="register-container">
-                <h1>S'enregistrer sur le site</h1>
                 <RegisterForm onSuccess={handleRegisterSuccess} />
             </div>
         </div>

@@ -4,7 +4,6 @@ function AuthLayout({children}){
     return(
         <div className='app-container'>
 
-            <header>Gestion Login</header>
             <div>
                     {children}
             </div>

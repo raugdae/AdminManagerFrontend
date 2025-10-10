@@ -4,12 +4,13 @@ import AdminLayout from "./components/AdminLayout";
 import AuthLayout from "./components/AuthLayout";
 import EventList from "./components/EventList/EventList.jsx";
 import HomePage from "./pages/HomePage";
-import Dashboard from "./pages/Dashboard.jsx";
+//import Dashboard from "./pages/Dashboard.jsx";
 //import EventsPage from './pages/EventsPage';
 import Login from "./components/Login/Login.jsx";
 import Register from "./components/Register/Register.jsx";
 
 import "./App.css";
+import "./index.css";
 
 function App() {
   return (
@@ -17,13 +18,11 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/auth/login" element={<Login />} />
           <Route
             path="/admin/*"
             element={
               <AdminLayout>
                 <Routes>
-                  <Route index element={<div>Dashboard Admin</div>} />
                   <Route path="events/" element={<EventList />} />
                 </Routes>
               </AdminLayout>
@@ -34,7 +33,7 @@ function App() {
             element={
               <AuthLayout>
                 <Routes>
-                  <Route index element={<div>Login/Register</div>} />
+                  
                   <Route path="login" element={<Login />} />
                   <Route path="register" element={<Register />} />
                 </Routes>

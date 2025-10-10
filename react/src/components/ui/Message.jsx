@@ -1,4 +1,3 @@
-import '../../styles/components/Message.css'
 
 function Message({ text, type = 'info'}){
     if (!text) return null

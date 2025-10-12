@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://remote.raug-info.ch:3000'
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'
 
 class ApiClient {
   constructor(baseURL) {
@@ -17,7 +17,7 @@ class ApiClient {
         ...options.headers,
       },
     }
-
+    console.log(url);
     const response = await fetch(url, config)
     
     if (!response.ok) {
@@ -30,7 +30,6 @@ class ApiClient {
 
   // Méthodes raccourcies
   get(endpoint) {
-    console.log(this.token);
     return this.request(endpoint, { method: 'GET' })
   }
 

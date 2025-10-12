@@ -7,7 +7,7 @@ function Login() {
   const handleLoginSuccess = (data) => {
     console.log("Utilisateur connecté:", data);
 
-    navigate("/admin/");
+    navigate("/Dashboard/");
     // Ici tu pourras rediriger vers le dashboard
   };
 

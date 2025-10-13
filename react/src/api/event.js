@@ -14,5 +14,5 @@ export async function pushEventUpdate(eventID,data){
 }
 
 export async function getOrderFromInfomaniak(eventID,data){
-    return apiClient.put(`/api/event/${eventID}/updateInfomaniakTicketing`,data)
+    return apiClient.put(`/api/admin/event/${eventID}/updateInfomaniakTicketing`,data)
 }

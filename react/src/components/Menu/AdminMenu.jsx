@@ -63,6 +63,26 @@ function AdminMenu ({children,menuLevel=1,parentMenu=''}){
         menuLevel: 2,
         parentMenu:'manageEvent'
         },
+        //Add shop item
+        {id: 'addShopItem',
+        label : 'Ajouter un objet au shop',
+        path: adminPath+'/shop/addobject',
+        section :1,
+        requireAuth: true,
+        requireRole : 'admin',
+        menuLevel: 2,
+        parentMenu:'manageShop'
+        },
+        //Manage event groups
+        {id: 'manageEventGroup',
+        label : 'Gérer les groups',
+        path: adminPath+'manageevent/managegroups',
+        section :1,
+        requireAuth: true,
+        requireRole : 'admin',
+        menuLevel: 2,
+        parentMenu:'manageEvent'
+        },
         //Manage Attendees
         {id: 'manageAttendees',
         label : 'Gérer les participants',
@@ -72,16 +92,6 @@ function AdminMenu ({children,menuLevel=1,parentMenu=''}){
         requireRole: 'admin',
         menuLevel: 2,
         parentMenu:'manageEvent'
-        },
-        //Add shop item
-        {id: 'addShopItem',
-        label : 'Ajouter un objet au shop',
-        path: '/admin/shop/addobject',
-        section :1,
-        requireAuth: true,
-        requireRole : 'admin',
-        menuLevel: 2,
-        parentMenu:'manageShop'
         },
         //Manage users
         {id: 'manageUsers',

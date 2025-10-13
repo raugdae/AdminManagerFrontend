@@ -12,6 +12,7 @@ import Dashboard from "./pages/Dashboard";
 import EditEvent from "./components/Event/EditEvent.jsx";
 import ShopManagement from "./components/Shop/ShopManagement.jsx";
 import EditEventLayout from "./components/Layouts/EditEventLayout.jsx";
+import EventGroups from "./components/Groups/EventGroups.jsx"
 
 import "./App.css";
 import "./index.css";
@@ -36,6 +37,7 @@ function App() {
                               <Routes>
                                 <Route path="editevent/" element={<EditEvent />}/>
                                 <Route path="manageshop/" element={<ShopManagement />}/>
+                                <Route path="managegroups/" element={<EventGroups/>}/>
                               </Routes>
                             </EditEventLayout>
                           }

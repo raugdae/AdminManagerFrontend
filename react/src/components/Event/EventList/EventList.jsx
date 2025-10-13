@@ -4,6 +4,7 @@ import EventCard from './eventCard'
 
 
 
+
 function EventList(){
 
     const [event, setEvent] = useState([])

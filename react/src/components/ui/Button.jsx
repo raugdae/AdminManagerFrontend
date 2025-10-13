@@ -1,6 +1,6 @@
 import '../../index.css'
 
-function Button({children, onClick, type = 'button', disabled = false, className = 'bg-emerald-300 border-4 border-red-300 rounded-2xl h-10 py-0.5 w-40 hover:bg-emerald-700'}){
+function Button({children, onClick, type = 'button', disabled = false, className = 'bg-emerald-300 border-4 border-red-300 rounded-2xl h-10 py-0.5 w-40 hover:bg-emerald-700 justify-center'}){
     return (
         <button 
         type = {type}

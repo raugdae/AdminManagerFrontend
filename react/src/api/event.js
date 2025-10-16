@@ -24,3 +24,7 @@ export async function getEventGroups(eventID){
 export async function deleteEventGroup(eventID,groupID){
     return apiClient.delete(`/api/admin/event/${eventID}/groups/deleteGroup/${groupID}`)
 }
+
+export async function updateEventGroup(eventID,groupID,data){
+    return apiClient.put(`/api/admin/event/${eventID}/groups/${groupID}/updateEventGroup`,data)
+}

@@ -1,4 +1,4 @@
-import { Trash2, Pen,X } from 'lucide-react'
+import { Trash2, Pen, X } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { getEventGroups, deleteEventGroup, updateEventGroup } from '../../api/event';
 import Modal from '../ui/Modal'
@@ -22,17 +22,9 @@ function EventGroups() {
 
   }, []);
 
-
-  if (dataset.length <= 0) {
-    return <div> no data to display </div>;
-  }
-
-
-
   const handleEdit = async (item, modalType) => {
     await setSelectedItem(item);
     await setModalType(modalType)
-    console.log(item);
     setIsModalOpen(true);
   };
 
@@ -42,11 +34,10 @@ function EventGroups() {
   };
 
   const handleGroupEditChange = async () => {
-    console.log('Update groupe modificaitons', selectedItem);
 
-    //const data = {groupe:e.groupe,parentid:e.id}
+    await updateEventGroup(localStorage.getItem('eventID'), selectedItem.id, selectedItem);
 
-    const response = await updateEventGroup(localStorage.getItem('eventID'), selectedItem.id, selectedItem);
+    fetchData();
     setIsModalOpen(false)
 
   }
@@ -62,7 +53,7 @@ function EventGroups() {
     }
   }
 
-  const handleAdd = async(modalType) => {
+  const handleAdd = async (modalType) => {
     await setModalType(modalType);
     setIsModalOpen(true);
   }
@@ -73,7 +64,7 @@ function EventGroups() {
   return (
     <div className="flex flex-col m-4">
       <div className='flex justify-center '>
-      <button className='border-lime-800 border-4 bg-emerald-700 hover:bg-green-300 ' onClick={()=>handleAdd('Add')}>Ajouter un groupe</button>
+        <button className='border-lime-800 border-4 bg-emerald-700 hover:bg-green-300 ' onClick={() => handleAdd('Add')}>Ajouter un groupe</button>
       </div>
       {dataset.length > 0 && (
         <div className="flex flex-row m-4 justify-around bg-gray-100 rounded">
@@ -128,84 +119,108 @@ function EventGroups() {
       <Modal
         isOpen={isModalOpen}
         onClose={closeModal}
-        
+
       >
         {modalType === 'Edit' && (
-          <div>
-          <div className='flex justify-between item-center mb-4 bg-violet-400'>
-                    <div className="flex font-extrabold p-4"><h2 className='font-normal p-4 align-middle
-                    75'>Modifier le groupe </h2> {selectedItem.groupe}</div>
-                    <button onClick={closeModal} className='text-gray-500 hover:text-red-700 transition-colors'><X/></button>
-                </div>
-          <div className="space-y-4">
-            {Object.keys(selectedItem).map((key) => {
-              if (key === 'groupe') {
-                return (<div key={key}>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    {key}
-                  </label>
-                  <input
-                    type="text"
-                    value={selectedItem[key]}
-                    onChange={(e) => setSelectedItem({
-                      ...selectedItem,
-                      [key]: e.target.value
-                    })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>)
-              }
-              if (key === 'parent') {
-                return (<div>
-                  <div className='block text-sm text-gray-700 mb-1'>
-                    <h2>Parent</h2>
-                  </div>
-                  <select className='rounded-2xl, bg-cyan-300 border-2' onChange={(e) => {
-                    console.log(key
-                    )
-                    setSelectedItem({
-                      ...selectedItem,
-                      fk_parentgroupid: e.target.value
-                    })
-                  }}>
-                    {dataset.map((item, index) => {
+          <div className="flex flex-col bg-gradient-to-b from-emerald-500 to-emerald-900">
+            <div className='relative flex justify-between items-center'>
+              <div className='absolute bg-gradient-to-br from-white/40 to-transparent pointer-events-none h-full w-full rounded-b-lg'></div>
+              <div className="font-extrabold ml-4"><h2>
+                Modifier le groupe <b>{selectedItem.groupe} </b></h2> </div>
+              <button onClick={closeModal} className='text-gray-500 hover:text-red-700 transition-colors m-4'><X /></button>
+            </div>
+            <div className="space-y-4 flex flex-col justify-center">
+              {Object.keys(selectedItem).map((key) => {
+                if (key === 'groupe') {
+                  return (<div key={key} className='relative flex flex-col m-4'>
+                    <div className='absolute bg-gradient-to-br from-white/40 to-transparent pointer-events-none h-full w-full rounded-t-xl'></div>
+                    <label className="block text-sm font-medium z-10 text-black/90 ml-4 mb-1 pt-1">
+                      Nom du groupe
+                    </label>
+                    <input
+                      type="text"
+                      value={selectedItem[key]}
+                      onChange={(e) => setSelectedItem({
+                        ...selectedItem,
+                        [key]: e.target.value
+                      })}
+                      className="w-full px-3 py-2 border bg-zinc-100 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>)
+                }
+                if (key === 'parent') {
+                  return (<div className='m-4 relative flex flex-col'>
+                    <div className='absolute bg-gradient-to-br from-white/40 to-transparent pointer-events-none h-full w-full rounded-t-xl'></div>
+                    <div className='block text-sm text-black z-10 w-full ml-4 mb-1 pt-1'>
+                      <h2>Parent</h2>
+                    </div>
+                    <select className='bg-zinc-200 border-2 px-3 py-2' defaultValue={selectedItem.key} onChange={(e) => {
+                      setSelectedItem({
+                        ...selectedItem,
+                        fk_parentgroupid: e.target.value
+                      })
+                    }}>
+                      {dataset.map((item, index) => {
 
-                      if (item.groupe !== selectedItem.groupe)
-                        return <option
-                          key={index} className='bg-green-400 ' value={item.id}>{item.groupe}</option>
+                        if (item.groupe !== selectedItem.groupe)
+                          return <option
+                            key={index} value={item.id}>{item.groupe}</option>
 
-                    })}
-                  </select>
-                </div>)
-              }
+                      })}
+                      
+                    </select>
+                  </div>)
+                }
 
-            })}
+              })}
 
-            <div className="flex gap-2 justify-end mt-6">
-              <button
-                onClick={closeModal}
-                className="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded"
-              >
-                Annuler
-              </button>
-              <button
-                className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
-                onClick={handleGroupEditChange}
-              >
-                Sauvegarder
-              </button>
+              <div className="flex gap-2 justify-end mb-4 mr-4">
+                <button
+                  onClick={closeModal}
+                  className="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded"
+                >
+                  Annuler
+                </button>
+                <button
+                  className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
+                  onClick={handleGroupEditChange}
+                >
+                  Sauvegarder
+                </button>
+              </div>
             </div>
           </div>
-        </div>
         )
 
         }
         {
-        modalType === 'Add' && (
-        <div className='flex flex-col'>
-          <h2 className='justify-center'>Ajouter</h2>
-        </div>
-        )
+          modalType === 'Add' && (
+            <div className='flex flex-col bg-gradient-to-b from-emerald-700 to-emerald-900'>
+              <div className='flex justify-between items-center relative'>
+                <div className='absolute bg-gradient-to-br from-white/40 to-transparent pointer-events-none h-full w-full'></div>
+                <div className='pl-4 text-black/90 z-10'>
+                  <h2 >Ajouter un groupe</h2>
+                </div>
+                  <button onClick={closeModal} className='text-gray-500 hover:text-red-700 transition-colors m-4'><X /></button>
+              </div>
+              <div className='flex justify-center p-4 w-full h-full bg-emerald-200'>
+                <form>
+                  <div>
+                    <input type='text' name='groupName' className="bg-zinc-100"></input>
+                  </div>
+                  <div>
+                    <select>
+                      {Object.values(dataset).map((value) => (
+                        <option key={value.key} value={value.groupid} className='p-4'
+                        >{value.groupe}</option>
+                      ))}
+                    </select>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          )
 
         }
       </Modal>

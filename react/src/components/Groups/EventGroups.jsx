@@ -205,11 +205,13 @@ function EventGroups() {
               </div>
               <div className='flex justify-center p-4 w-full h-full bg-emerald-200'>
                 <form>
-                  <div>
-                    <input type='text' name='groupName' className="bg-zinc-100"></input>
-                  </div>
-                  <div>
-                    <select>
+                  <div className='flex flex-col relative gap-2'>
+                    <div className='absolute bg-gradient-to-br from-white/40 to-transparent pointer-events-none w-full h-fulll'></div>
+                    <label>Nom du groupe</label>
+                    <input type='text' name='groupName' className="bg-zinc-100 px-3 py-2"></input>
+
+                    <label>Groupe parent</label>
+                    <select className='bg-zinc-200 w-full px-3 py-2'> 
                       {Object.values(dataset).map((value) => (
                         <option key={value.key} value={value.groupid} className='p-4'
                         >{value.groupe}</option>

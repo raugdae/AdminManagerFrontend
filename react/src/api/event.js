@@ -6,7 +6,7 @@ export async function fetchAllEvents(){
 
 export async function fetchEventData(eventID){
     
-    return  apiClient.get('/api/admin/event/'+eventID)
+    return  apiClient.get(`/api/admin/event/${eventID}`)
 }
 
 export async function pushEventUpdate(eventID,data){
@@ -27,4 +27,8 @@ export async function deleteEventGroup(eventID,groupID){
 
 export async function updateEventGroup(eventID,groupID,data){
     return apiClient.put(`/api/admin/event/${eventID}/groups/${groupID}/updateEventGroup`,data)
+}
+
+export async function addEventGroup(eventID,data){
+    return apiClient.post(`/api/admin/event/${eventID}/addgroup`,data)
 }
